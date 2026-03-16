@@ -1,189 +1,206 @@
-.product-detail {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-}
-
-.product-detail--loading {
+.pd-loading {
   text-align: center;
   padding: 3rem;
-  color: #666;
-  font-size: 1.125rem;
+  color: #9ca3af;
 }
 
-.product-detail__header {
+.pd {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Back button nav */
+.pd__nav {
+  margin-bottom: 0.75rem;
+}
+
+.pd__back-btn {
+  background: white;
+  border: 1px solid #e0e4e8;
+  border-radius: 6px;
+  padding: 0.375rem 0.875rem;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pd__back-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+/* Main card */
+.pd__card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e8ecf0;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Header: symbol + fav */
+.pd__header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 1rem;
+  padding: 1.25rem 1.5rem 0;
 }
 
-.product-detail__header h1 {
-  margin: 0;
-  font-size: 2rem;
-  color: #2c3e50;
+.pd__symbol {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1d23;
 }
 
-.product-detail__header p {
-  margin: 0.5rem 0 0 0;
-  color: #999;
-  font-weight: normal;
+.pd__name {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-top: 0.2rem;
 }
 
-.header-actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.fav-btn {
+.pd__fav-btn {
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #999;
-  transition: color 0.2s, transform 0.2s;
-  padding: 0.5rem;
+  color: #d1d5db;
+  padding: 0;
+  transition: color 0.15s ease, transform 0.15s ease;
 }
 
-.fav-btn:hover {
-  color: #ffa500;
+.pd__fav-btn:hover {
+  color: #f59e0b;
   transform: scale(1.1);
 }
 
-.fav-btn.active {
-  color: #ffa500;
+.pd__fav-btn.active {
+  color: #f59e0b;
 }
 
-.btn-close {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #999;
-  transition: color 0.2s;
-  padding: 0.5rem;
-}
-
-.btn-close:hover {
-  color: #2c3e50;
-}
-
-.product-detail__main-price {
-  margin-bottom: 2rem;
-  padding: 2rem;
-  background: #f9fafb;
-  border-radius: 8px;
-}
-
-.price-display h2 {
-  margin: 0 0 1rem 0;
-  font-size: 2.5rem;
-  font-family: 'Monaco', 'Menlo', monospace;
-  color: #2c3e50;
-}
-
-.price-display .change {
-  font-size: 1.25rem;
-  font-weight: 600;
+/* Price row */
+.pd__price-row {
   display: flex;
-  gap: 0.5rem;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem 0;
 }
 
-.price-display .change.positive {
-  color: #22c55e;
+.pd__price {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1a1d23;
+  font-variant-numeric: tabular-nums;
 }
 
-.price-display .change.negative {
-  color: #ef4444;
+.pd__change {
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.product-detail__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+.pd__change.positive {
+  color: #16a34a;
+}
+
+.pd__change.negative {
+  color: #dc2626;
+}
+
+/* Stats bar */
+.pd__stats {
+  display: flex;
+  gap: 0;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f3f4f6;
+  flex-wrap: wrap;
   gap: 1.5rem;
-  margin-bottom: 2rem;
 }
 
-.detail-card {
-  padding: 1.5rem;
-  background: #f9fafb;
-  border-radius: 8px;
-  border: 1px solid #e8eef5;
-  transition: all 0.2s;
+.pd__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.detail-card:hover {
-  border-color: #1a73e8;
-  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.1);
-}
-
-.detail-card h3 {
-  margin: 0 0 0.75rem 0;
-  font-size: 0.875rem;
+.pd__stat-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #9ca3af;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #666;
+}
+
+.pd__stat-value {
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  color: #1a1d23;
+  font-variant-numeric: tabular-nums;
 }
 
-.detail-card p {
-  margin: 0;
-  font-size: 1.25rem;
+/* Side-by-side panels */
+.pd__panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid #f3f4f6;
+  /* fixed height so neither column can grow the card */
+  height: 520px;
+  overflow: hidden;
+}
+
+.pd__panel {
+  padding: 1.25rem 1.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pd__panel:first-child {
+  border-right: 1px solid #f3f4f6;
+}
+
+.pd__panel-title {
+  font-size: 0.9rem;
   font-weight: 600;
-  font-family: 'Monaco', 'Menlo', monospace;
-  color: #2c3e50;
+  color: #374151;
+  margin-bottom: 0.875rem;
 }
 
-.product-detail__orderbook,
-.product-detail__trades {
-  margin-bottom: 2rem;
+/* WebSocket status */
+.pd__ws-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  color: #6b7280;
 }
 
-.product-detail__orderbook h2,
-.product-detail__trades h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.25rem;
-  color: #2c3e50;
+.pd__ws-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
 }
 
-@media (max-width: 768px) {
-  .product-detail {
-    padding: 1rem;
+@media (max-width: 700px) {
+  .pd__panels {
+    grid-template-columns: 1fr;
   }
 
-  .product-detail__header {
-    flex-direction: column;
+  .pd__panel:first-child {
+    border-right: none;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .pd__price {
+    font-size: 1.75rem;
+  }
+
+  .pd__stats {
     gap: 1rem;
-  }
-
-  .product-detail__header h1 {
-    font-size: 1.5rem;
-  }
-
-  .header-actions {
-    align-self: flex-end;
-  }
-
-  .price-display h2 {
-    font-size: 2rem;
-  }
-
-  .product-detail__grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-  }
-
-  .detail-card {
-    padding: 1rem;
-  }
-
-  .detail-card p {
-    font-size: 1rem;
   }
 }

@@ -9,26 +9,26 @@ import './App.css';
 function App() {
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const { tickers, candleData, isLoading } = useTickerStream(SYMBOLS);
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
 
   const selectedTicker = selectedSymbol ? tickers[selectedSymbol] : undefined;
   const selectedCandle = selectedSymbol ? candleData[selectedSymbol] : undefined;
 
-  // Filter tickers based on favorites toggle
-  const displayTickers = showFavoritesOnly
-    ? Object.fromEntries(
-        Object.entries(tickers).filter(([symbol]) => favorites.has(symbol))
-      )
-    : tickers;
+  const displayTickers = Object.fromEntries(
+    Object.entries(tickers).filter(([symbol]) => {
+      if (showFavoritesOnly && !favorites.has(symbol)) return false;
+      return true;
+    })
+  );
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>🚀 Crypto Price Tracker</h1>
-        <p>Real-time cryptocurrency prices with WebSocket updates</p>
+        <h1 className="app-heading">Crypto Price Tracker</h1>
+        <p className="app-subheading">Real-time prices with live WebSocket updates</p>
       </header>
-
       <main className="app-main">
         {selectedSymbol ? (
           <ProductDetail
@@ -40,30 +40,51 @@ function App() {
             onClose={() => setSelectedSymbol(null)}
           />
         ) : (
-          <section className="prices-section">
-            <div className="section-controls">
-              <h2>Live Prices</h2>
-              <button
-                className={`filter-btn ${showFavoritesOnly ? 'active' : ''}`}
-                onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-              >
-                {showFavoritesOnly ? '★ Favorites Only' : '☆ Show All'}
-              </button>
+          <div className="markets-container">
+            <div className="markets-card">
+              <h2 className="markets-title">Markets</h2>
+
+              <div className="markets-tabs">
+                <button
+                  className={`markets-tab ${!showFavoritesOnly ? 'active' : ''}`}
+                  onClick={() => setShowFavoritesOnly(false)}
+                >
+                  All
+                </button>
+                <button
+                  className={`markets-tab ${showFavoritesOnly ? 'active' : ''}`}
+                  onClick={() => setShowFavoritesOnly(true)}
+                >
+                  ★ Favorites
+                </button>
+              </div>
+
+              <div className="markets-search">
+                <input
+                  type="text"
+                  placeholder="Search by name or symbol..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                />
+              </div>
+
+              <TickerTable
+                tickers={displayTickers}
+                isLoading={isLoading}
+                onSymbolClick={setSelectedSymbol}
+                onToggleFavorite={toggleFavorite}
+                favorites={favorites}
+                searchQuery={searchQuery}
+              />
+
+              <div className="markets-footer">
+                Data from mock server · See server/README.md
+              </div>
             </div>
-            <TickerTable
-              tickers={displayTickers}
-              isLoading={isLoading}
-              onSymbolClick={setSelectedSymbol}
-              onToggleFavorite={toggleFavorite}
-              favorites={favorites}
-            />
-          </section>
+          </div>
         )}
       </main>
-
-      <footer className="app-footer">
-        <p>Data updates in real-time via WebSocket • Made with React + TypeScript</p>
-      </footer>
     </div>
   );
 }

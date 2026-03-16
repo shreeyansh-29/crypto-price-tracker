@@ -1,130 +1,127 @@
 .app {
   min-height: 100vh;
+  background: #f0f2f5;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
+
+/* ── Header ──────────────────────────────────── */
 
 .app-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 3rem 2rem;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  margin-bottom: 2rem;
+  padding: 2rem 1.5rem 1.25rem;
 }
 
-.app-header h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: 2.5rem;
+.app-heading {
+  font-size: 1.6rem;
   font-weight: 700;
+  color: #1a1d23;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.01em;
 }
 
-.app-header p {
+.app-subheading {
   margin: 0;
-  font-size: 1.1rem;
-  opacity: 0.9;
+  font-size: 0.875rem;
+  color: #9ca3af;
 }
 
 .app-main {
   flex: 1;
-  padding: 0 2rem 2rem 2rem;
-  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+/* ── Markets List ────────────────────────────── */
+
+.markets-container {
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
 }
 
-.prices-section {
+.markets-card {
   background: white;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border: 1px solid #e8ecf0;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
-.section-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.section-controls h2 {
-  margin: 0;
-  color: #2c3e50;
-  font-size: 1.75rem;
-}
-
-.filter-btn {
-  padding: 0.75rem 1.5rem;
-  background: #f0f0f0;
-  border: 2px solid transparent;
-  border-radius: 20px;
-  cursor: pointer;
+.markets-title {
+  font-size: 1.125rem;
   font-weight: 600;
-  transition: all 0.2s;
-  color: #666;
-}
-
-.filter-btn:hover {
-  border-color: #1a73e8;
-}
-
-.filter-btn.active {
-  background: #1a73e8;
-  color: white;
-  border-color: #1a73e8;
-}
-
-.app-footer {
-  background: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 2rem;
-  margin-top: auto;
-}
-
-.app-footer p {
+  color: #1a1d23;
+  padding: 1.25rem 1.5rem 0;
   margin: 0;
+}
+
+.markets-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem 0;
+}
+
+.markets-tab {
+  padding: 0.375rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #e0e4e8;
+  background: white;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.markets-tab:hover {
+  border-color: #b0b8c4;
+  color: #374151;
+}
+
+.markets-tab.active {
+  background: #1a1d23;
+  color: white;
+  border-color: #1a1d23;
+}
+
+.markets-search {
+  padding: 0.875rem 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border: 1px solid #e0e4e8;
+  border-radius: 8px;
   font-size: 0.9rem;
-  opacity: 0.8;
+  color: #374151;
+  outline: none;
+  transition: border-color 0.15s ease;
+  background: #fafbfc;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.search-input:focus {
+  border-color: #6b7280;
+  background: white;
+}
+
+.markets-footer {
+  padding: 0.875rem 1.5rem;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-align: center;
+  border-top: 1px solid #f3f4f6;
 }
 
 @media (max-width: 768px) {
-  .app {
-    padding: 0;
-  }
-
-  .app-header {
-    padding: 2rem 1rem;
-  }
-
-  .app-header h1 {
-    font-size: 1.75rem;
-  }
-
-  .app-header p {
-    font-size: 0.95rem;
-  }
-
   .app-main {
     padding: 1rem;
-  }
-
-  .prices-section {
-    padding: 1rem;
-  }
-
-  .section-controls {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .section-controls h2 {
-    font-size: 1.25rem;
-  }
-
-  .filter-btn {
-    align-self: flex-end;
   }
 }

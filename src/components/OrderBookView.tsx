@@ -1,4 +1,3 @@
-import React from 'react';
 import type { OrderBookWithDepth } from '../hooks/useOrderBook';
 import '../styles/OrderBook.css';
 
@@ -9,67 +8,74 @@ interface OrderBookViewProps {
 
 export function OrderBookView({ orderBook, isLoading }: OrderBookViewProps) {
   if (isLoading) {
-    return <div className="orderbook--loading">Loading orderbook...</div>;
+    return <div className="ob-loading">Loading orderbook...</div>;
   }
 
   if (!orderBook) {
-    return <div className="orderbook--empty">No orderbook data</div>;
+    return <div className="ob-empty">No orderbook data</div>;
   }
 
   const maxDepth = orderBook.maxDepth || 1;
 
+  const askLevels = [...orderBook.asksWithDepth].reverse();
+
+  const bestAsk = orderBook.asksWithDepth[0]?.price ?? 0;
+  const bestBid = orderBook.bidsWithDepth[0]?.price ?? 0;
+  const spread = bestAsk - bestBid;
+  const spreadPct = bestBid > 0 ? (spread / bestBid) * 100 : 0;
+
   return (
-    <div className="orderbook">
-      <div className="orderbook-section">
-        <h3>Asks (Sell Orders)</h3>
-        <div className="orderbook-header">
-          <div className="ob-col-price">Price</div>
-          <div className="ob-col-size">Size</div>
-          <div className="ob-col-depth">Depth</div>
-        </div>
-        <div className="orderbook-rows">
-          {orderBook.asksWithDepth.map((level) => {
-            const depthPercent = (level.cumulativeSize / maxDepth) * 100;
-            return (
-              <div key={level.price} className="orderbook-row ask">
-                <div className="ob-col-price">${level.price.toFixed(2)}</div>
-                <div className="ob-col-size">{level.size.toFixed(4)}</div>
-                <div className="ob-col-depth">
-                  <div
-                    className="depth-bar ask-bar"
-                    style={{ width: `${depthPercent}%` }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
+    <div className="ob">
+      {/* Column headers */}
+      <div className="ob__header">
+        <div className="ob__hcell ob__hcell--price">PRICE</div>
+        <div className="ob__hcell">SIZE</div>
+        <div className="ob__hcell">TOTAL</div>
       </div>
 
-      <div className="orderbook-section">
-        <h3>Bids (Buy Orders)</h3>
-        <div className="orderbook-header">
-          <div className="ob-col-price">Price</div>
-          <div className="ob-col-size">Size</div>
-          <div className="ob-col-depth">Depth</div>
-        </div>
-        <div className="orderbook-rows">
-          {orderBook.bidsWithDepth.map((level) => {
-            const depthPercent = (level.cumulativeSize / maxDepth) * 100;
-            return (
-              <div key={level.price} className="orderbook-row bid">
-                <div className="ob-col-price">${level.price.toFixed(2)}</div>
-                <div className="ob-col-size">{level.size.toFixed(4)}</div>
-                <div className="ob-col-depth">
-                  <div
-                    className="depth-bar bid-bar"
-                    style={{ width: `${depthPercent}%` }}
-                  />
-                </div>
+      {/* Asks (sell orders) — shown top, lowest ask at bottom */}
+      <div className="ob__asks">
+        {askLevels.map((level) => {
+          const pct = maxDepth > 0 ? (level.cumulativeSize / maxDepth) * 100 : 0;
+          return (
+            <div key={level.price} className="ob__row ob__row--ask">
+              <div
+                className="ob__depth-fill ob__depth-fill--ask"
+                style={{ width: `${pct}%` }}
+              />
+              <div className="ob__cell ob__cell--price ask-price">
+                {level.price.toFixed(2)}
               </div>
-            );
-          })}
-        </div>
+              <div className="ob__cell">{level.size.toFixed(3)}</div>
+              <div className="ob__cell">{level.cumulativeSize.toFixed(3)}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Spread */}
+      <div className="ob__spread">
+        Spread: ${spread.toFixed(2)} ({spreadPct.toFixed(3)}%)
+      </div>
+
+      {/* Bids (buy orders) */}
+      <div className="ob__bids">
+        {orderBook.bidsWithDepth.map((level) => {
+          const pct = maxDepth > 0 ? (level.cumulativeSize / maxDepth) * 100 : 0;
+          return (
+            <div key={level.price} className="ob__row ob__row--bid">
+              <div
+                className="ob__depth-fill ob__depth-fill--bid"
+                style={{ width: `${pct}%` }}
+              />
+              <div className="ob__cell ob__cell--price bid-price">
+                {level.price.toFixed(2)}
+              </div>
+              <div className="ob__cell">{level.size.toFixed(3)}</div>
+              <div className="ob__cell">{level.cumulativeSize.toFixed(3)}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

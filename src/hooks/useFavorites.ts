@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FAVORITES_STORAGE_KEY } from '../config';
 
 export function useFavorites() {

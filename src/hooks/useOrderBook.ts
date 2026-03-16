@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { OrderBookData, OrderBookLevel } from '../types';
 import { useWebSocket } from './useWebSocket';
 
@@ -10,7 +10,6 @@ export interface OrderBookWithDepth extends OrderBookData {
 
 export function useOrderBook(symbol: string | null) {
   const [orderBook, setOrderBook] = useState<OrderBookWithDepth | null>(null);
-  const orderBookRef = useRef<OrderBookData | null>(null);
 
   const handleMessage = useCallback((data: any) => {
     if (data.type === 'l2_orderbook' && data.symbol === symbol) {
@@ -43,7 +42,7 @@ export function useOrderBook(symbol: string | null) {
       );
 
       setOrderBook({
-        symbol,
+        symbol: symbol!,
         bids: parsedBids,
         asks: parsedAsks,
         timestamp: data.timestamp || Date.now(),

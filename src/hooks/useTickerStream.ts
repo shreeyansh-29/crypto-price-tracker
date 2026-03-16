@@ -59,15 +59,14 @@ export function useTickerStream(symbols: string[]) {
       }));
     } else if (data.type?.startsWith('candlestick_')) {
       const { symbol, candle_start_time, open, high, low, close, volume } = data;
-      const startTime = candle_start_time;
       candleRef.current[symbol] = {
         symbol,
-        startTime,
-        open,
-        high,
-        low,
-        close,
-        volume,
+        startTime: candle_start_time,
+        open: parseFloat(open),
+        high: parseFloat(high),
+        low: parseFloat(low),
+        close: parseFloat(close),
+        volume: parseFloat(volume),
       };
       setCandleData((prev) => ({
         ...prev,
