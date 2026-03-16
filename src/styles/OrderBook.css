@@ -2,7 +2,7 @@
 .ob-empty {
   padding: 1.5rem 0;
   text-align: center;
-  color: #9ca3af;
+  color: var(--text-faint);
   font-size: 0.85rem;
 }
 
@@ -16,14 +16,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding: 0 0 0.5rem 0;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 0.125rem;
 }
 
 .ob__hcell {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #9ca3af;
+  color: var(--text-faint);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-align: right;
@@ -60,18 +60,22 @@
 }
 
 .ob__depth-fill--ask {
-  background: rgba(220, 38, 38, 0.08);
+  background: var(--ob-ask-fill);
 }
 
 .ob__depth-fill--bid {
-  background: rgba(22, 163, 74, 0.08);
+  background: var(--ob-bid-fill);
 }
 
 .ob__cell {
   position: relative;
   text-align: right;
-  color: #374151;
+  color: var(--text-body);
   z-index: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ob__cell--price {
@@ -80,20 +84,20 @@
 }
 
 .ask-price {
-  color: #dc2626;
+  color: var(--color-red);
 }
 
 .bid-price {
-  color: #16a34a;
+  color: var(--color-green);
 }
 
 /* Spread divider */
 .ob__spread {
   text-align: center;
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: var(--text-faint);
   padding: 0.5rem 0;
-  border-top: 1px solid #f3f4f6;
-  border-bottom: 1px solid #f3f4f6;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   margin: 0.125rem 0;
 }

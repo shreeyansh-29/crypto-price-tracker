@@ -1,14 +1,81 @@
+/* ── Theme tokens ─────────────────────────────── */
+
 :root {
+  --bg-page:        #f0f2f5;
+  --bg-card:        #ffffff;
+  --bg-card-hover:  #f8f9fb;
+  --bg-input:       #fafbfc;
+  --bg-input-focus: #ffffff;
+
+  --border:         #e8ecf0;
+  --border-subtle:  #f3f4f6;
+  --border-input:   #e0e4e8;
+  --border-input-focus: #6b7280;
+
+  --text-primary:   #1a1d23;
+  --text-body:      #374151;
+  --text-muted:     #6b7280;
+  --text-faint:     #9ca3af;
+
+  --tab-active-bg:    #1a1d23;
+  --tab-active-color: #ffffff;
+
+  --fav-inactive:   #d1d5db;
+
+  --color-green:    #16a34a;
+  --color-red:      #dc2626;
+  --color-amber:    #f59e0b;
+
+  --ob-ask-fill:    rgba(220, 38, 38, 0.08);
+  --ob-bid-fill:    rgba(22, 163, 74, 0.08);
+  --trade-buy-bg:   rgba(22, 163, 74, 0.10);
+  --trade-sell-bg:  rgba(220, 38, 38, 0.10);
+
+  --shadow-card:    0 1px 4px rgba(0, 0, 0, 0.06);
+
+  /* base typography */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #374151;
-  background-color: #f0f2f5;
+  color: var(--text-body);
+  background-color: var(--bg-page);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+[data-theme="dark"] {
+  --bg-page:        #0d1117;
+  --bg-card:        #161b22;
+  --bg-card-hover:  #1c2129;
+  --bg-input:       #1c2129;
+  --bg-input-focus: #21262d;
+
+  --border:         #30363d;
+  --border-subtle:  #21262d;
+  --border-input:   #30363d;
+  --border-input-focus: #8b949e;
+
+  --text-primary:   #e6edf3;
+  --text-body:      #c9d1d9;
+  --text-muted:     #8b949e;
+  --text-faint:     #6e7681;
+
+  --tab-active-bg:    #e6edf3;
+  --tab-active-color: #0d1117;
+
+  --fav-inactive:   #484f58;
+
+  --ob-ask-fill:    rgba(220, 38, 38, 0.12);
+  --ob-bid-fill:    rgba(22, 163, 74, 0.12);
+  --trade-buy-bg:   rgba(22, 163, 74, 0.14);
+  --trade-sell-bg:  rgba(220, 38, 38, 0.14);
+
+  --shadow-card:    0 1px 4px rgba(0, 0, 0, 0.30);
+}
+
+/* ── Reset / base ─────────────────────────────── */
 
 * {
   box-sizing: border-box;
@@ -19,6 +86,9 @@ body {
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #root {
@@ -38,7 +108,7 @@ button {
 }
 
 button:focus-visible {
-  outline: 2px solid #6b7280;
+  outline: 2px solid var(--border-input-focus);
   outline-offset: 2px;
 }
 

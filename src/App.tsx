@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { SYMBOLS } from './config';
 import { useTickerStream } from './hooks/useTickerStream';
 import { useFavorites } from './hooks/useFavorites';
+import { useTheme } from './hooks/useTheme';
 import { TickerTable } from './components/TickerTable';
 import { ProductDetail } from './pages/ProductDetail';
 import './App.css';
@@ -12,6 +13,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const { tickers, candleData, isLoading } = useTickerStream(SYMBOLS);
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
+  const { theme, toggleTheme } = useTheme();
 
   const selectedTicker = selectedSymbol ? tickers[selectedSymbol] : undefined;
   const selectedCandle = selectedSymbol ? candleData[selectedSymbol] : undefined;
@@ -28,6 +30,15 @@ function App() {
       <header className="app-header">
         <h1 className="app-heading">Crypto Price Tracker</h1>
         <p className="app-subheading">Real-time prices with live WebSocket updates</p>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+        >
+          {theme === 'light' ? '🌙' : '☀️'}
+          <span className="theme-toggle__label">{theme === 'light' ? 'Dark' : 'Light'}</span>
+        </button>
       </header>
       <main className="app-main">
         {selectedSymbol ? (

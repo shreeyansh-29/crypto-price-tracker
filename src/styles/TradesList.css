@@ -2,7 +2,7 @@
 .tl-empty {
   padding: 1.5rem 0;
   text-align: center;
-  color: #9ca3af;
+  color: var(--text-faint);
   font-size: 0.85rem;
 }
 
@@ -13,6 +13,7 @@
   flex-direction: column;
   flex: 1;
   overflow: hidden;
+  min-width: 0;
 }
 
 /* Header */
@@ -20,17 +21,18 @@
   display: grid;
   grid-template-columns: 1fr 1fr 0.8fr 1fr;
   padding: 0 0 0.5rem 0;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 0.125rem;
 }
 
 .tl__hcell {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #9ca3af;
+  color: var(--text-faint);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-align: right;
+  min-width: 0;
 }
 
 .tl__hcell--price {
@@ -66,7 +68,11 @@
 
 .tl__cell {
   text-align: right;
-  color: #374151;
+  color: var(--text-body);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tl__cell--price {
@@ -75,15 +81,15 @@
 }
 
 .buy-price {
-  color: #16a34a;
+  color: var(--color-green);
 }
 
 .sell-price {
-  color: #dc2626;
+  color: var(--color-red);
 }
 
 .tl__cell--time {
-  color: #9ca3af;
+  color: var(--text-faint);
 }
 
 /* BUY / SELL badge */
@@ -98,11 +104,26 @@
 }
 
 .tl__side-badge.buy {
-  background: rgba(22, 163, 74, 0.1);
-  color: #16a34a;
+  background: var(--trade-buy-bg);
+  color: var(--color-green);
 }
 
 .tl__side-badge.sell {
-  background: rgba(220, 38, 38, 0.1);
-  color: #dc2626;
+  background: var(--trade-sell-bg);
+  color: var(--color-red);
+}
+
+/* ── Responsive ──────────────────────────────── */
+
+/* Hide TIME column on very narrow screens */
+@media (max-width: 420px) {
+  .tl__header,
+  .tl__row {
+    grid-template-columns: 1fr 1fr 0.8fr;
+  }
+
+  .tl__hcell--time,
+  .tl__cell--time {
+    display: none;
+  }
 }

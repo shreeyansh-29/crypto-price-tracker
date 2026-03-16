@@ -1,8 +1,14 @@
+/* Horizontal scroll wrapper */
+.ticker-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .ticker-table--loading,
 .ticker-table--empty {
   text-align: center;
   padding: 2.5rem;
-  color: #9ca3af;
+  color: var(--text-faint);
   font-size: 0.9rem;
 }
 
@@ -11,15 +17,17 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   padding: 0.625rem 1.5rem;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border-subtle);
+  min-width: 480px;
 }
 
 .th {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #9ca3af;
+  color: var(--text-faint);
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  min-width: 0;
 }
 
 .th--price,
@@ -33,10 +41,11 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   padding: 0.875rem 1.5rem;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border-subtle);
   cursor: pointer;
   transition: background-color 0.12s ease;
   align-items: center;
+  min-width: 480px;
 }
 
 .ticker-row:last-child {
@@ -44,12 +53,16 @@
 }
 
 .ticker-row:hover {
-  background-color: #f8f9fb;
+  background-color: var(--bg-card-hover);
 }
 
 .td {
   font-size: 0.9rem;
-  color: #374151;
+  color: var(--text-body);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Symbol cell */
@@ -57,6 +70,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  overflow: visible; /* let symbol-info clip instead */
 }
 
 .fav-star {
@@ -64,7 +78,7 @@
   border: none;
   font-size: 1rem;
   cursor: pointer;
-  color: #d1d5db;
+  color: var(--fav-inactive);
   padding: 0;
   line-height: 1;
   transition: color 0.15s ease, transform 0.15s ease;
@@ -72,37 +86,44 @@
 }
 
 .fav-star:hover {
-  color: #f59e0b;
+  color: var(--color-amber);
   transform: scale(1.15);
 }
 
 .fav-star.active {
-  color: #f59e0b;
+  color: var(--color-amber);
 }
 
 .symbol-info {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
+  min-width: 0;
 }
 
 .symbol-code {
   font-weight: 600;
-  color: #1a1d23;
+  color: var(--text-primary);
   font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .symbol-name {
   font-size: 0.78rem;
-  color: #9ca3af;
+  color: var(--text-faint);
   font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Price cell */
 .td--price {
   text-align: right;
   font-weight: 600;
-  color: #1a1d23;
+  color: var(--text-primary);
   font-variant-numeric: tabular-nums;
 }
 
@@ -114,29 +135,26 @@
 }
 
 .td--change.positive {
-  color: #16a34a;
+  color: var(--color-green);
 }
 
 .td--change.negative {
-  color: #dc2626;
+  color: var(--color-red);
 }
 
 /* Volume cell */
 .td--volume {
   text-align: right;
-  color: #6b7280;
+  color: var(--text-muted);
   font-variant-numeric: tabular-nums;
 }
 
+/* ── Responsive ──────────────────────────────── */
+
+/* Tighten row padding on smaller screens; all 4 columns stay visible via scroll */
 @media (max-width: 600px) {
   .ticker-table__header,
   .ticker-row {
-    grid-template-columns: 2fr 1fr 1fr;
     padding: 0.75rem 1rem;
-  }
-
-  .th--volume,
-  .td--volume {
-    display: none;
   }
 }

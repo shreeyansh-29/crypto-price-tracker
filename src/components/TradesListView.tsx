@@ -21,7 +21,7 @@ export function TradesListView({ trades, isLoading }: TradesListViewProps) {
         <div className="tl__hcell tl__hcell--price">PRICE</div>
         <div className="tl__hcell">SIZE</div>
         <div className="tl__hcell">SIDE</div>
-        <div className="tl__hcell">TIME</div>
+        <div className="tl__hcell tl__hcell--time">TIME</div>
       </div>
 
       <div className="tl__body">

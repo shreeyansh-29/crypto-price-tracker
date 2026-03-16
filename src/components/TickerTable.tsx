@@ -38,6 +38,7 @@ export function TickerTable({
   }
 
   return (
+    <div className="ticker-table-scroll">
     <div className="ticker-table">
       <div className="ticker-table__header">
         <div className="th th--symbol">SYMBOL</div>
@@ -88,6 +89,7 @@ export function TickerTable({
           </div>
         );
       })}
+    </div>
     </div>
   );
 }
